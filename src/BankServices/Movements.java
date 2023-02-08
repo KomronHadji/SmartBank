@@ -32,6 +32,12 @@ public class Movements {
         return deposit != null ? deposit.getDate() : withdrawal.getDate();
     }
 
+    public double getAmount() {
+        if (deposit == null) {
+            return withdrawal.getAmount();
+        } else return deposit.getAmount();
+    }
+
     @Override
     public String toString() {
         return
