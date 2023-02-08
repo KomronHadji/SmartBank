@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Bank {
     private String name;
-    private int accountCount;
+//    private int accountCount;
 
     private List<Account> accountList = new ArrayList<>();
     private List<Deposit> depositList = new ArrayList<>();
@@ -30,7 +30,7 @@ public class Bank {
         Deposit deposit = new Deposit(account, date, initial);
         depositList.add(deposit);
         movements.add(new Movements(deposit));
-        return accountCount;
+        return account.getCode();
 
 //        return accountList.size();
     }
@@ -135,7 +135,13 @@ public class Bank {
     }
 
     public List<Account> getAccountsByBalance(double low, double high) {
-        return null;
+        List<Account> list = new ArrayList<>();
+        for (Account account : accountList) {
+            if (account.getBalance() >= low || account.getBalance() <= high) {
+                list.add(account);
+            }
+        }
+        return list;
     }
 
     public long getNumberHigher(double min) {
