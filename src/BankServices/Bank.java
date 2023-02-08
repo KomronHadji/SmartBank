@@ -1,6 +1,7 @@
 package BankServices;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bank {
     private String name;
@@ -9,7 +10,6 @@ public class Bank {
     private List<Account> accountList = new ArrayList<>();
     private List<Deposit> depositList = new ArrayList<>();
     private List<Withdrawal> withdrawalList = new ArrayList<>();
-    private List<Movements> movements = new ArrayList<>();
 
 
     public Bank(String name) {
@@ -29,7 +29,6 @@ public class Bank {
         accountList.add(account);
         Deposit deposit = new Deposit(account, date, initial);
         depositList.add(deposit);
-        movements.add(new Movements(deposit));
         return accountCount;
 
 //        return accountList.size();
@@ -68,7 +67,6 @@ public class Bank {
         Deposit deposit = new Deposit(account, date, value);
         account.addBalance(value);
         depositList.add(deposit);
-        movements.add(new Movements(deposit));
     }
 
     public void withdraw(int code, int date, double value) throws InvalidCode, InvalidValue {
@@ -80,7 +78,6 @@ public class Bank {
         Withdrawal withdrawal = new Withdrawal(getAccount(code), date, value);
         account.withdraw(value);
         withdrawalList.add(withdrawal);
-        movements.add(new Movements(withdrawal));
 
     }
 
@@ -101,20 +98,8 @@ public class Bank {
     }
 
     public double getTotalDeposit() {
-        double totalDeposit = 0;
-        for (Deposit deposit : depositList) {
-            totalDeposit += deposit.getAmount();
-        }
 
-        return totalDeposit;
-    }
-
-    public List<Movements> getMovements() {
-        Collections.sort(movements, new SortbyDate());
-        for (Movements movements1 : movements) {
-            System.out.println(movements1.toString());
-        }
-        return movements;
+        return 0.0;
     }
 
     public List<Account> getAccounts() {
@@ -132,12 +117,5 @@ public class Bank {
 
     public long getNumberHigher(double min) {
         return 0;
-    }
-
-    class SortbyDate implements Comparator<Movements> {
-
-        public int compare(Movements a, Movements b) {
-            return b.getDate() - a.getDate();
-        }
     }
 }
