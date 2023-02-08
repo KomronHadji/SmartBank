@@ -98,8 +98,12 @@ public class Bank {
     }
 
     public double getTotalDeposit() {
+        double totalDeposit = 0;
+        for (Deposit deposit : depositList) {
+            totalDeposit += deposit.getAmount();
+        }
 
-        return 0.0;
+        return totalDeposit;
     }
 
     public List<Account> getAccounts() {
